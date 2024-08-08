@@ -22,7 +22,7 @@ dbConnection();
 require('express-async-errors');
 
 // CORS Configuration
-const allowedOrigins = ["http://localhost:5173", "http://localhost:3000"];
+const allowedOrigins = ["http://localhost:5173", "http://localhost:3000", "https://kellerstore-uk0g.onrender.com", "https://kellerstore.vercel.app"];
 
 app.use(cors({
     origin: function(origin, callback) {
