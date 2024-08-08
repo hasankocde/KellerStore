@@ -11,7 +11,7 @@ import DropdownMenu from "./DropdownMenu";
 import { Link, useNavigate } from "react-router-dom";
 import useKellerCall from "../hooks/useKellerCall";
 import { useSelector, useDispatch } from "react-redux";
-import '../index.css';
+
 
 const Navbar = () => {
   const currentUser = useSelector((state) => state.auth.currentUser);
@@ -28,6 +28,7 @@ const Navbar = () => {
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     const fetchFollowCount = async () => {
       try {
@@ -43,6 +44,7 @@ const Navbar = () => {
     fetchFollowCount();
   }, [isAuthenticated, currentUser, isLoggedOut]);
 
+
   const handleFavoriteClick = () => {
     setShowFollowCount(false);
   };
@@ -53,6 +55,7 @@ const Navbar = () => {
     }
   };
 
+
   const handleLogout = () => {
     setIsLoggedOut(true);
     setFollowCount(0);
@@ -60,6 +63,7 @@ const Navbar = () => {
     // Dispatch an action to clear the auth state in Redux
     dispatch({ type: 'LOGOUT' });
   };
+
 
   return (
     <nav className="bg-white border-b z-50">
@@ -75,7 +79,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex flex-wrap items-center space-x-2 border-2 rounded-md bg-gray-100 max-w-[500px] order-3 md:order-none">
-          <div className="w-full sm:w-auto flex items-center flex-wrap sm:flex-nowrap">
+          <div className="w-full sm:w-auto flex items-center">
             <input
               className="w-full outline-none appearance-none placeholder-gray-500 pl-1 text-gray-500 bg-gray-100"
               type="text"
@@ -113,6 +117,7 @@ const Navbar = () => {
             </button>
           </div>
         </div>
+
 
         <div>
           <DropdownMenu />
