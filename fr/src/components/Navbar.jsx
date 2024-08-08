@@ -40,10 +40,10 @@ const Navbar = () => {
         console.error("Failed to fetch follow count", error);
       }
     };
-  
+
     fetchFollowCount();
   }, [isAuthenticated, currentUser, isLoggedOut]);
-  
+
 
   const handleFavoriteClick = () => {
     setShowFollowCount(false);
@@ -54,7 +54,7 @@ const Navbar = () => {
       navigate('/combined-search', { state: { searchQuery: searchQuery.trim(), PLZ, radius } });
     }
   };
-  
+
 
   const handleLogout = () => {
     setIsLoggedOut(true);
@@ -80,24 +80,25 @@ const Navbar = () => {
 
         <div className="flex items-center space-x-2 border-2 rounded-md bg-gray-100 flex-grow flex-shrink max-w-[500px] order-3 md:order-none">
           <input
-            className="w-full outline-none appearance-none placeholder-gray-500 pl-1 text-gray-500 sm:w-auto bg-gray-100"
+            className="w-full outline-none appearance-none placeholder-gray-500 pl-1 text-gray-500 sm:w-auto bg-gray-100 flex-grow"
             type="text"
             placeholder="Ad Suchen"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            style={{ width: "10rem" }}
           />
+
           <input
             type="text"
             placeholder="PLZ"
             value={PLZ}
             onChange={(e) => setPLZ(e.target.value)}
-            className="border rounded-md p-2 w-24"
+            className="border rounded-md p-2 w-24 md:w-auto"
           />
+
           <select
             value={radius}
             onChange={(e) => setRadius(e.target.value)}
-            className="border rounded-md p-2"
+            className="border rounded-md p-2 md:w-auto"
           >
             <option value="Ganzer Ort">Ganzer Ort</option>
             <option value="5">+ 5 km</option>
@@ -109,11 +110,14 @@ const Navbar = () => {
             <option value="150">+ 150 km</option>
             <option value="200">+ 200 km</option>
           </select>
-          <button onClick={handleSearch} className="btn bg-button-blue border border-0.5 border-button-blue hover:border-button-orange">
+          <button
+            onClick={handleSearch}
+            className="btn bg-button-blue border border-0.5 border-button-blue hover:border-button-orange whitespace-nowrap"
+          >
             Suchen
           </button>
         </div>
-        
+
         <div>
           <DropdownMenu />
         </div>
@@ -139,7 +143,7 @@ const Navbar = () => {
               <FavoriteIcon count={followCount} showCount={showFollowCount} onClick={handleFavoriteClick} />
             </div>
             <div>
-            <AvatarMenu onLogout={handleLogout} />
+              <AvatarMenu onLogout={handleLogout} />
             </div>
           </>
         )}
