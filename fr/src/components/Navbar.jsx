@@ -11,6 +11,7 @@ import DropdownMenu from "./DropdownMenu";
 import { Link, useNavigate } from "react-router-dom";
 import useKellerCall from "../hooks/useKellerCall";
 import { useSelector, useDispatch } from "react-redux";
+import '../index.css';
 
 const Navbar = () => {
   const currentUser = useSelector((state) => state.auth.currentUser);
