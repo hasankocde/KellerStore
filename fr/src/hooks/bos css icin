@@ -1,0 +1,37 @@
+import React, { useEffect, useState } from "react";
+import Banner from "../components/Banner";
+import CategoryIconCard from "../components/cards/CategoryIconCard";
+import AdContainer from "../components/container/AdContainer";
+import useKellerCall from "../hooks/useKellerCall";
+import { useSelector } from "react-redux";
+import '../index.css';
+
+const Home = () => {
+  const title = `Kaufen und verkaufen Sie alles, von Gebrauchtwagen bis hin zu Mobiltelefonen und Computern, oder suchen Sie weltweit nach Immobilien, Jobs und mehr`;
+  const { getAds } = useKellerCall();
+  const ads = useSelector((state) => state.keller.ads);
+
+  useEffect(() => {
+    getAds();
+  }, []);
+
+  return (
+    <div>
+      <div>
+        <Banner title={title} />
+        <div className="margin-3mm">
+          <CategoryIconCard />
+        </div>
+      </div>
+      <div className="flex">
+        <div className="flex-grow">
+          <AdContainer title={"Neueste"}  ads={ads} />
+          <AdContainer title={"Beliebte"}  ads={ads} />
+          <AdContainer title={"Most View"}  ads={ads} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home;

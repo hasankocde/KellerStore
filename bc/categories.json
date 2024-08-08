@@ -1,0 +1,131 @@
+[
+  {
+    "categoryName": "Möbel",
+    "subcategories": [
+      {"name": "Sofas", "parentCategory": "Möbel"},
+      {"name": "Tische und Stühle", "parentCategory": "Möbel"},
+      {"name": "Schlafzimmermöbel", "parentCategory": "Möbel"},
+      {"name": "Büromöbel", "parentCategory": "Möbel"},
+      {"name": "Gartenmöbel", "parentCategory": "Möbel"}
+    ]
+  },
+  {
+    "categoryName": "Elektronik",
+    "subcategories": [
+      {"name": "Audio & Hifi", "parentCategory": "Elektronik"},
+      {"name": "Foto", "parentCategory": "Elektronik"},
+      {"name": "Handy & Telefon", "parentCategory": "Elektronik"},
+      {"name": "Computer & Zubehör", "parentCategory": "Elektronik"},
+      {"name": "TV & Video", "parentCategory": "Elektronik"},
+      {"name": "Videospiele", "parentCategory": "Elektronik"},
+      {"name": "Konsolen", "parentCategory": "Elektronik"},
+      {"name": "Weitere Elektronik", "parentCategory": "Elektronik"}
+    ]
+  },
+  {
+    "categoryName": "Fahrzeuge",
+    "subcategories": [
+      {"name": "Autos", "parentCategory": "Fahrzeuge"},
+      {"name": "Motorräder & Motorroller", "parentCategory": "Fahrzeuge"},
+      {"name": "Fahrräder & Zubehör", "parentCategory": "Fahrzeuge"},
+      {"name": "Boote & Bootszubehör", "parentCategory": "Fahrzeuge"},
+      {"name": "Wohnwagen & Wohnmobile", "parentCategory": "Fahrzeuge"},
+      {"name": "Anhänger", "parentCategory": "Fahrzeuge"},
+      {"name": "Autoteile & Reifen", "parentCategory": "Fahrzeuge"},
+      {"name": "LKW & Nutzfahrzeuge", "parentCategory": "Fahrzeuge"},
+      {"name": "Baumaschinen", "parentCategory": "Fahrzeuge"},
+      {"name": "Landmaschinen", "parentCategory": "Fahrzeuge"},
+      {"name": "Flugzeuge & Hubschrauber", "parentCategory": "Fahrzeuge"},
+      {"name": "Oldtimer & Youngtimer", "parentCategory": "Fahrzeuge"}
+    ]
+  },
+  {
+    "categoryName": "Immobilien",
+    "subcategories": [
+      {"name": "Häuser & Wohnungen", "parentCategory": "Immobilien"},
+      {"name": "Grundstücke", "parentCategory": "Immobilien"},
+      {"name": "Gewerbeimmobilien", "parentCategory": "Immobilien"},
+      {"name": "Mietwohnungen", "parentCategory": "Immobilien"},
+      {"name": "WG-Zimmer", "parentCategory": "Immobilien"},
+      {"name": "Ferienwohnungen & Ferienhäuser", "parentCategory": "Immobilien"},
+      {"name": "Garagen & Stellplätze", "parentCategory": "Immobilien"},
+      {"name": "Immobilienfinanzierung", "parentCategory": "Immobilien"},
+      {"name": "Makler & Verwalter", "parentCategory": "Immobilien"}
+    ]
+  },
+  {
+    "categoryName": "Haushalt & Wohnen",
+    "subcategories": [
+      {"name": "Möbel & Einrichtung", "parentCategory": "Haushalt & Wohnen"},
+      {"name": "Haushaltsgeräte", "parentCategory": "Haushalt & Wohnen"},
+      {"name": "Küche & Esszimmer", "parentCategory": "Haushalt & Wohnen"},
+      {"name": "Schlafzimmer", "parentCategory": "Haushalt & Wohnen"},
+      {"name": "Wohnzimmer", "parentCategory": "Haushalt & Wohnen"},
+      {"name": "Badezimmer", "parentCategory": "Haushalt & Wohnen"},
+      {"name": "Garten & Terrasse", "parentCategory": "Haushalt & Wohnen"},
+      {"name": "Baudekoration", "parentCategory": "Haushalt & Wohnen"},
+      {"name": "Teppiche & Gardinen", "parentCategory": "Haushalt & Wohnen"},
+      {"name": "Heimtextilien", "parentCategory": "Haushalt & Wohnen"},
+      {"name": "Sonstiges", "parentCategory": "Haushalt & Wohnen"}
+    ]
+  },
+  {
+    "categoryName": "Mode & Accessoires",
+    "subcategories": [
+      {"name": "Damenbekleidung", "parentCategory": "Mode & Accessoires"},
+      {"name": "Herrenbekleidung", "parentCategory": "Mode & Accessoires"},
+      {"name": "Kinderbekleidung", "parentCategory": "Mode & Accessoires"},
+      {"name": "Schuhe & Taschen", "parentCategory": "Mode & Accessoires"},
+      {"name": "Accessoires", "parentCategory": "Mode & Accessoires"},
+      {"name": "Uhren & Schmuck", "parentCategory": "Mode & Accessoires"},
+      {"name": "Sportbekleidung", "parentCategory": "Mode & Accessoires"},
+      {"name": "Kostüme & Verkleidungen", "parentCategory": "Mode & Accessoires"},
+      {"name": "Vintage & Second Hand", "parentCategory": "Mode & Accessoires"}
+    ]
+  },
+  {
+    "categoryName": "Hobby & Freizeit",
+    "subcategories": [
+      {"name": "Bücher & Zeitschriften", "parentCategory": "Hobby & Freizeit"},
+      {"name": "Sammeln & Tauschen", "parentCategory": "Hobby & Freizeit"},
+      {"name": "Musikinstrumente", "parentCategory": "Hobby & Freizeit"},
+      {"name": "Sport & Fitness", "parentCategory": "Hobby & Freizeit"},
+      {"name": "Spiele & Spielzeug", "parentCategory": "Hobby & Freizeit"},
+      {"name": "Hobby & Basteln", "parentCategory": "Hobby & Freizeit"},
+      {"name": "Kunst & Antiquitäten", "parentCategory": "Hobby & Freizeit"},
+      {"name": "Haustiere", "parentCategory": "Hobby & Freizeit"},
+      {"name": "Camping & Outdoor", "parentCategory": "Hobby & Freizeit"},
+      {"name": "Motorrad & Roller", "parentCategory": "Hobby & Freizeit"},
+      {"name": "Veranstaltungen", "parentCategory": "Hobby & Freizeit"},
+      {"name": "Reisen & Urlaub", "parentCategory": "Hobby & Freizeit"},
+      {"name": "Sonstiges", "parentCategory": "Hobby & Freizeit"}
+    ]
+  },
+  {
+    "categoryName": "Familie, Kind & Baby",
+    "subcategories": [
+      {"name": "Baby- & Kinderkleidung", "parentCategory": "Familie, Kind & Baby"},
+      {"name": "Spielzeug", "parentCategory": "Familie, Kind & Baby"},
+      {"name": "Kinderwagen & Sitze", "parentCategory": "Familie, Kind & Baby"},
+      {"name": "Schwangerschaft", "parentCategory": "Familie, Kind & Baby"},
+      {"name": "Spielzeug Außen", "parentCategory": "Familie, Kind & Baby"},
+      {"name": "Weitere Familie, Kind & Baby", "parentCategory": "Familie, Kind & Baby"}
+    ]
+  },
+  {
+    "categoryName": "Tiermarkt",
+    "subcategories": [
+      {"name": "Hunde", "parentCategory": "Tiermarkt"},
+      {"name": "Katzen", "parentCategory": "Tiermarkt"},
+      {"name": "Pferde", "parentCategory": "Tiermarkt"},
+      {"name": "Kleintiere", "parentCategory": "Tiermarkt"},
+      {"name": "Fische & Aquaristik", "parentCategory": "Tiermarkt"},
+      {"name": "Vögel", "parentCategory": "Tiermarkt"},
+      {"name": "Reptilien", "parentCategory": "Tiermarkt"},
+      {"name": "Landwirtschaftliche Nutztiere", "parentCategory": "Tiermarkt"},
+      {"name": "Reitbeteiligungen", "parentCategory": "Tiermarkt"},
+      {"name": "Tierzubehör", "parentCategory": "Tiermarkt"},
+      {"name": "Tierpensionen", "parentCategory": "Tiermarkt"}
+    ]
+  }
+]

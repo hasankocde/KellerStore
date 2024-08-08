@@ -1,0 +1,32 @@
+FONT
+# ---------------------------------------------------------------------------- #
+# FONTS
+# ---------------------------------------------------------------------------- #
+Work Sans:
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+# ---------------------------------------------------------------------------- #
+# COLORS
+# ---------------------------------------------------------------------------- #
+
+basliklar siyah:000000
+arka fon beyaz:FFFFFF
+
+buton mavi:0022AA
+buton turuncu:F3630F
+
+like sari:E8CE00
+buton yesil:#11B76B
+category arka fon mavi:DFFBFF
+view yesil: 8EDB04
+icon koyu gri:585454
+
+facebook buton mavi:4267B2
+twitter buton mavi:1DA1F2
+google buton kirmizi:DB4437
+
+footer arka fon koyu mavi:080229
+filter arka fon acik mavi:285BB0
+arka fon gri:D9D9D9
+cart arka fon gri:B5B0B0
+acik gri:F5F5F5

@@ -1,0 +1,233 @@
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import useKellerCall from '../../hooks/useKellerCall';
+import ReservationButton from '../buttons/ReservationButton';
+import SoldButton from '../buttons/SoldButton';
+
+const MessageContainer = () => {
+  const [groupedMessages, setGroupedMessages] = useState({});
+  const [adDetails, setAdDetails] = useState({});
+  const [firstMessageSenders, setFirstMessageSenders] = useState({});
+  const [newMessage, setNewMessage] = useState({});
+  const [adIds, setAdIds] = useState({});
+  const [recipientIds, setRecipientIds] = useState({});
+  const [participantNames, setParticipantNames] = useState({});
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const { getKellerData, postKellerData, getAdData } = useKellerCall();
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+  useEffect(() => {
+    getKellerData("messages").then((data) => {
+      if (data && data.length > 0) {
+        const adDetails = {};
+        const firstSenders = {};
+        const grouped = {};
+        const adIds = {};
+        const recipientIds = {};
+        const names = {};
+        data.forEach(conversation => {
+          if (conversation.adId && conversation.adId.ownerId && conversation.messages) {
+            adDetails[conversation._id] = {
+              title: conversation.adId.title,
+              image: `${BASE_URL}${conversation.adId.images[0]}`,
+              isReserved: conversation.adId.isReserved,
+              reservedUserId: conversation.adId.reservedUserId,
+              isSold: conversation.adId.isSold,
+              soldUserId: conversation.adId.soldUserId,
+              ownerId: conversation.adId.ownerId._id
+            };
+            firstSenders[conversation._id] = conversation.messages[0]?.senderId._id;
+            adIds[conversation._id] = conversation.adId._id;
+            const recipient = conversation.participants.find(p => p._id !== currentUser);
+            recipientIds[conversation._id] = recipient._id;
+            names[conversation.messages[0]?.senderId._id] = conversation.messages[0]?.senderId.firstName;
+            names[conversation.adId.ownerId._id] = conversation.adId.ownerId.firstName;
+            grouped[conversation._id] = conversation.messages.map(message => ({
+              ...message,
+              conversationId: conversation._id,
+              adOwnerId: conversation.adId.ownerId._id
+            }));
+          }
+        });
+
+        setAdDetails(adDetails);
+        setFirstMessageSenders(firstSenders);
+        setGroupedMessages(grouped);
+        setAdIds(adIds);
+        setRecipientIds(recipientIds);
+        setParticipantNames(names);
+      }
+    }).catch(err => console.error(err));
+  }, [currentUser, refreshKey]);
+
+  const handleInputChange = (conversationId, text) => {
+    setNewMessage({
+      ...newMessage,
+      [conversationId]: text
+    });
+  };
+
+  const handleSend = async (conversationId) => {
+    const messageText = newMessage[conversationId];
+    if (messageText && adIds[conversationId] && recipientIds[conversationId]) {
+      try {
+        const message = {
+          adId: adIds[conversationId],
+          message: messageText,
+          recipientId: recipientIds[conversationId]
+        };
+        const response = await postKellerData(`messages`, message);
+
+        setGroupedMessages((prevGroupedMessages) => {
+          const updatedMessages = prevGroupedMessages[conversationId] ? [...prevGroupedMessages[conversationId], response] : [response];
+          return {
+            ...prevGroupedMessages,
+            [conversationId]: updatedMessages
+          };
+        });
+
+        setNewMessage({
+          ...newMessage,
+          [conversationId]: ''
+        });
+
+        setRefreshKey(prevKey => prevKey + 1);
+      } catch (err) {
+        console.error("Failed to send message", err);
+      }
+    }
+  };
+
+  const handleReservationToggle = async (adId) => {
+    const adData = await getAdData(adId);
+    if (adData) {
+      const updatedAdDetails = { ...adDetails };
+
+      Object.keys(adDetails).forEach(conversationId => {
+        if (adIds[conversationId] === adId) {
+          updatedAdDetails[conversationId] = {
+            ...adDetails[conversationId],
+            isReserved: adData.isReserved,
+            reservedUserId: adData.reservedUserId
+          };
+        }
+      });
+
+      setAdDetails(updatedAdDetails);
+      setRefreshKey(prevKey => prevKey + 1);
+    }
+  };
+
+  const handleSoldToggle = async (adId) => {
+    const adData = await getAdData(adId);
+    if (adData) {
+      const updatedAdDetails = { ...adDetails };
+
+      Object.keys(adDetails).forEach(conversationId => {
+        if (adIds[conversationId] === adId) {
+          updatedAdDetails[conversationId] = {
+            ...adDetails[conversationId],
+            isSold: adData.isSold,
+            soldUserId: adData.soldUserId
+          };
+        }
+      });
+
+      setAdDetails(updatedAdDetails);
+      setRefreshKey(prevKey => prevKey + 1);
+    }
+  };
+
+  const renderMessage = (message, firstSenderId) => {
+    const senderId = message.senderId._id;
+    const isCurrentUserSender = senderId === currentUser?._id;
+    const isSenderCustomer = senderId === firstSenderId;
+    const senderFirstName = participantNames[senderId];
+    const recipientFirstName = participantNames[message.adOwnerId] || participantNames[firstSenderId];
+
+    return (
+      <div key={message._id} className={`mt-3 mb-7 flex items-center ${isSenderCustomer ? 'justify-start' : 'justify-end'} gap-5 px-3`}>
+        <div className="w-3/6">
+          <p className={`border ${isSenderCustomer ? 'border-button-blue bg-button-blue text-white' : 'border-light-grey bg-light-grey text-black'} p-3 rounded-lg`}>
+            {message.messageText}
+          </p>
+          <div className={`text-sm ${isSenderCustomer ? 'text-left' : 'text-right'}`}>
+            {isSenderCustomer ? `müsteri - ${senderFirstName}` : `satici - ${recipientFirstName}`}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="border w-full m-10 bg-light-grey pb-7 rounded-lg">
+      <div className="flex justify-between items-center pt-3 pb-3">
+        <h1 className="text-3xl ps-5 pt-5">Nachricht</h1>
+      </div>
+      {Object.entries(groupedMessages).map(([conversationId, messages]) => (
+        <div key={conversationId} className="bg-white mx-7 my-2 rounded-lg border-2 mb-10 px-3">
+          <div className="mt-3 mb-7 flex items-center justify-start gap-5 border-b border-b-black mx-10 pb-3">
+            <img
+              src={adDetails[conversationId]?.image}
+              className="w-32 h-32 rounded-lg ms-10"
+              alt="Ad"
+            />
+            <div>
+              <h1 className="text-2xl">
+                {adDetails[conversationId]?.title}
+              </h1>
+            </div>
+          </div>
+          {messages.map((message) => (
+            message && message.messageText ? renderMessage(message, firstMessageSenders[conversationId]) : null
+          ))}
+          <div className="flex items-center mt-5 px-3 mb-1.5">
+            <input
+              type="text"
+              value={newMessage[conversationId] || ''}
+              onChange={(e) => handleInputChange(conversationId, e.target.value)}
+              placeholder="Write a message..."
+              className="border rounded-lg p-2 w-full mb-1.5"
+            />
+            <button
+              onClick={() => handleSend(conversationId)}
+              className="bg-blue-500 text-white rounded-lg p-2 ml-2 mb-1.5"
+            >
+              Send
+            </button>
+          </div>
+          {adDetails[conversationId]?.ownerId === currentUser && (
+            <div className="flex items-center px-3 mb-1.5 gap-1">
+              {!adDetails[conversationId]?.isReserved && (
+                <SoldButton
+                  conversationId={conversationId}
+                  adId={adIds[conversationId]}
+                  recipientId={recipientIds[conversationId]}
+                  isSoldInitially={adDetails[conversationId]?.isSold}
+                  soldUserId={adDetails[conversationId]?.soldUserId}
+                  isReserved={adDetails[conversationId]?.isReserved}
+                  onToggle={() => handleSoldToggle(adIds[conversationId])}
+                />
+              )}
+              {!adDetails[conversationId]?.isSold && (
+                <ReservationButton
+                  conversationId={conversationId}
+                  adId={adIds[conversationId]}
+                  recipientId={recipientIds[conversationId]}
+                  isReservedInitially={adDetails[conversationId]?.isReserved}
+                  reservedUserId={adDetails[conversationId]?.reservedUserId}
+                  isSold={adDetails[conversationId]?.isSold}
+                  onToggle={() => handleReservationToggle(adIds[conversationId])}
+                />
+              )}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default MessageContainer;

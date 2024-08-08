@@ -1,0 +1,70 @@
+// Home.jsx
+import React, { useEffect, useState } from "react";
+import Banner from "../components/Banner";
+import CategoryIconCard from "../components/cards/CategoryIconCard";
+import AdContainer from "../components/container/AdContainer";
+import useKellerCall from "../hooks/useKellerCall";
+import { useSelector } from "react-redux";
+import '../index.css';
+
+const Home = () => {
+  const title = "Kaufen und verkaufen Sie alles, von Gebrauchtwagen bis hin zu Mobiltelefonen und Computern, oder suchen Sie weltweit nach Immobilien, Jobs und mehr";
+  const { getAds, getFavoriteCount } = useKellerCall(); // getFavoriteCount ekledik
+  const ads = useSelector((state) => state.keller.ads);
+
+  const [sortedAds, setSortedAds] = useState({
+    latest: [],
+    popular: [],
+    mostViewed: [],
+  });
+
+  useEffect(() => {
+    const fetchAds = async () => {
+      await getAds(); 
+    };
+
+    fetchAds();
+  }, []); 
+
+  useEffect(() => {
+    const updateSortedAds = async () => {
+      const newSortedAds = {
+        latest: [...ads].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
+        popular: [],
+        mostViewed: [...ads].sort((a, b) => b.visitedUser.length - a.visitedUser.length),
+      };
+
+      // Log the sorted ads to debug
+      console.log('Latest Ads:', newSortedAds.latest);
+      console.log('Most Viewed Ads (before getting favorite counts):', newSortedAds.mostViewed);
+
+      for (const ad of ads) {
+        const favoriteCount = await getFavoriteCount(ad._id);
+        newSortedAds.popular.push({ ...ad, favoriteCount });
+      }
+
+      newSortedAds.popular.sort((a, b) => b.favoriteCount - a.favoriteCount);
+
+      // Log popular ads after sorting by favorite count
+      console.log('Popular Ads:', newSortedAds.popular);
+
+      setSortedAds(newSortedAds);
+    };
+
+    updateSortedAds();
+  }, [ads]);
+
+  return (
+    <div>
+      <Banner title={title} />
+      <div className="main-container">
+        <CategoryIconCard />
+        <AdContainer title={"Neueste"} ads={sortedAds.latest} />
+        <AdContainer title={"Beliebte"} ads={sortedAds.popular} />
+        <AdContainer title={"Most View"} ads={sortedAds.mostViewed} />
+      </div>
+    </div>
+  );
+};
+
+export default Home;
