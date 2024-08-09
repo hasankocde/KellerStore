@@ -38,9 +38,7 @@ const useAuthCall = () => {
       dispatch(fetchFail());
       if (error.message === "Password does not meet the required criteria.") {
         toastErrorNotify("Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters (@$!%*?&).");
-      } else {
-        toastErrorNotify("Registration failed. Please try again.");
-      }
+      } 
     }
   };
   
