@@ -24,14 +24,26 @@ const useAuthCall = () => {
   const register = async (userInfo) => {
     dispatch(fetchStart());
     try {
+      // Şifre validasyonu
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+      if (!passwordRegex.test(userInfo.password)) {
+        throw new Error("Password does not meet the required criteria.");
+      }
+  
       const { data } = await axios.post(`${BASE_URL}users/`, userInfo);
       toastSuccessNotify("Register performed");
       dispatch(registerSuccess(data));
       navigate("/");
     } catch (error) {
       dispatch(fetchFail());
+      if (error.message === "Password does not meet the required criteria.") {
+        toastErrorNotify("Password must contain at least 8 characters, including uppercase and lowercase letters, numbers, and special characters (@$!%*?&).");
+      } else {
+        toastErrorNotify("Registration failed. Please try again.");
+      }
     }
   };
+  
 
   const login = async (userInfo) => {
     dispatch(fetchStart());
