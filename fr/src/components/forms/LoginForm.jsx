@@ -35,7 +35,7 @@ const LoginForm = () => {
   return (
     <div>
       <h4 className=" text-blue-600 text-3xl font-semibold text-center">
-        Willkommen bei KelerStore!
+        Willkommen bei KellerStore!
       </h4>
       <div className="sm:col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-3">
         <form onSubmit={handleSubmit}>

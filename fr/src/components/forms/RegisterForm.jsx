@@ -39,7 +39,7 @@ const RegisterForm = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <h4 className=" text-blue-600 text-3xl font-semibold text-center">
-          Willkommen bei KelerStore!
+          Willkommen bei KellerStore!
           </h4>
           {/* <div>
             <div className="flex items-center gap-x-3 ">
