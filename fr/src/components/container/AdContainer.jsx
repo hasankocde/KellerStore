@@ -37,7 +37,7 @@ const AdContainer = ({ title, ads = [] }) => {
         responsive={responsive}
         ssr={true} // Means to render carousel on server-side.
         infinite={true}
-        autoPlay={false}
+        autoPlay={true}
         autoPlaySpeed={5000}
         keyBoardControl={true}
         customTransition="all .5"
