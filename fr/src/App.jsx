@@ -7,7 +7,9 @@ import store, { persistor } from "./app/store";
 import { ToastContainer } from "react-toastify";
 import { PersistGate } from "redux-persist/integration/react";
 import { AuthProvider } from "../src/helper/AuthContext";  // AuthProvider import edildi
-import { SpeedInsights } from '@vercel/speed-insights/react';
+
+// import { SpeedInsights } from '@vercel/speed-insights/react';
+{/* <SpeedInsights /> */}
 
 function App() {
   return (
@@ -20,7 +22,6 @@ function App() {
         </PersistGate>
       </Provider>
       <ToastContainer />
-      <SpeedInsights />
     </>
   );
 }
