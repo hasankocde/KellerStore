@@ -9,7 +9,7 @@
     "debug": "DEBUG=* nodemon"
   },
   "keywords": [],
-  "author": "Clarusway",
+  "author": "Hasan",
   "license": "ISC Licence",
   "dependencies": {
     "axios": "^1.7.2",

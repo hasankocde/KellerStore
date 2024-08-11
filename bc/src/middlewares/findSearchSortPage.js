@@ -1,11 +1,11 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+    NODEJS EXPRESS | ---
 ------------------------------------------------------- */
 // app.use(findSearchSortPage):
 
 module.exports = (req, res, next) => {
-// Searching & Sorting & Pagination:
+    // Searching & Sorting & Pagination:
 
     // FILTERING: URL?filter[key1]=value1&filter[key2]=value2
     let filter = req.query?.filter || {}

@@ -1,6 +1,6 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+    NODEJS EXPRESS | ---
 ------------------------------------------------------- */
 // sync():
 
@@ -9,11 +9,11 @@ const path = require('path');
 
 module.exports = async function () {
     const User = require('../models/user.model');
-   
+
 
     // Clear collections
     await User.deleteMany();
-    
+
 
     // Create admin user
     await User.create({
@@ -22,7 +22,7 @@ module.exports = async function () {
         isAdmin: true
     });
 
-   
+
 
     console.log('* Synchronized.');
 }
