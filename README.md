@@ -15,11 +15,6 @@ Table of Contents
 9. Risk Management
 
 
-
-
-
-
-
 Summary:
 1. Project Description and Objectives
 Keller Store aims to facilitate economical and environmentally friendly shopping by providing a platform for buying and selling second-hand products. The platform targets individuals interested in second-hand goods by offering a reliable and user-friendly shopping experience for both buyers and sellers.
@@ -39,26 +34,6 @@ The distribution strategies involve Cloud Deployment and Client Accessibility, e
 The project's timeline includes a 3-month duration for Development and Testing, followed by a 1-month duration for Application Deployment and Support.
 9. Risk Management
 Risk Management strategies encompass identified risks such as Data Security Risks and User Acceptance Risks, with corresponding mitigation strategies for security measures and feedback management using agile development methodologies.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 1. Project Description and Objectives
@@ -212,3 +187,12 @@ User Acceptance Risks: Regular feedback sessions during development.
 9.2 Mitigation Strategies:
 Security Measures: Regular updates and patches for security vulnerabilities.
 Feedback Management: Agile development methodologies for quick adaptation.
+
+
+INSTALLATION: 
+
+1. npm install -g npm
+2. pnpm install
+3. pnpm run dev
+
+
